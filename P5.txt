@@ -1,0 +1,70 @@
+.586
+.MODEL FLAT
+.STACK 4096
+INCLUDE io.h
+
+.DATA
+
+	G1 DWORD ?
+	G2 DWORD ?
+	G3 DWORD ?
+	G4 DWORD ?
+
+	inp BYTE 11 DUP(?)
+
+	takeG1 BYTE "Enter Grade 1 : ",0
+	takeG2 BYTE "Enter Grade 2 : ",0
+	takeG3 BYTE "Enter Grade 3 : ",0
+	takeG4 BYTE "Enter Grade 4 : ",0
+
+	
+	res BYTE 11 DUP(?),0
+
+	tit BYTE "Problem 5 Sheet 2",0
+
+.CODE
+
+MainProc PROC
+
+	input takeG1,inp,11
+	atod inp
+	mov G1,eax
+
+	input takeG2,inp,11
+	atod inp
+	mov G2,eax
+
+	input takeG3,inp,11
+	atod inp
+	mov G3,eax
+
+	input takeG4,inp,11
+	atod inp
+	mov G4,eax
+
+	mov eax,G1
+	add eax,G2
+	add eax,G3
+	add eax,G4
+
+	dtoa res,eax
+	output tit,res
+
+	atod res			; store the sum in eax again because it go out after dtoa instruction
+
+	mov edx, 0
+	mov ecx,4
+	div ecx
+
+	dtoa res,eax
+	output tit,res
+
+	dtoa res,edx
+	output tit,res
+
+	mov eax, 0
+	ret
+
+MainProc ENDP
+
+END
