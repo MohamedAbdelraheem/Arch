@@ -1,0 +1,102 @@
+.586
+
+.MODEL FLAT
+
+.STACK 4096
+
+INCLUDE io.h
+
+.DATA
+
+	pennies 	DD ?
+	nickels		DD ?
+	dimes		DD ?
+	quarters	DD ?
+	fiftyCent	DD ?
+	dollar		DD ?
+	
+	sumOfCoins	DD ?
+	sumOfDollar DD ?
+	sumOfRemainder DD ?
+
+	inp BYTE 40 DUP(?)
+
+	takePennies		BYTE "Enter Amount Of Pennies",0
+	takeNickels		BYTE "Enter Amount Of Nickels",0
+	takeDimes		BYTE "Enter Amount Of Dimes",0
+	takeQuarters	BYTE "Enter Amount Of Quarters",0
+	takeFiftyCents	BYTE "Enter Amount Of FiftyCents",0
+	takeDollars		BYTE "Enter Amount Of Dollars",0
+
+	tit BYTE "Problem 4",0
+
+.CODE
+
+MainProc PROC
+	
+	input takeDollars,inp,40
+	atod inp
+	mov dollar,eax
+
+	input takeFiftyCents,inp,40
+	atod inp
+	mov fiftyCent,eax
+	
+	input takeQuarters,inp,40
+	atod inp
+	mov quarters,eax
+
+	input takeDimes,inp,40
+	atod inp
+	mov dimes,eax
+
+	input takeNickels,inp,40
+	atod inp
+	mov nickels,eax
+
+	input takePennies,inp,40
+	atod inp
+	mov pennies,eax
+
+	mov eax,pennies
+
+	mov ebx,nickels
+	imul ebx,5
+	add eax,ebx
+
+	mov ebx,dimes
+	imul ebx,10
+	add eax,ebx
+
+	mov ebx,quarters
+	imul ebx,25
+	add eax,ebx
+
+	mov ebx,fiftyCent
+	imul ebx,50
+	add eax,ebx
+
+	mov ebx,dollar
+	imul ebx,100
+	add eax,ebx
+
+	dtoa sumOfCoins,eax
+	output tit,sumOfCoins
+
+	atod sumOfCoins,eax
+	mov edx,0
+	mov ecx,100
+	div ecx
+
+	dtoa sumOfDollar,eax
+	output tit,sumOfDollar
+
+	dtoa sumOfRemainder,edx
+	output tit,sumOfRemainder
+	
+	mov eax,0
+	ret
+
+MainProc ENDP
+
+END
