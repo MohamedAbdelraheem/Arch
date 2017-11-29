@@ -1,0 +1,48 @@
+.586
+.MODEL FLAT
+.STACK 4096
+INCLUDE io.h
+
+.DATA
+
+	x DWORD ?
+	y DWORD ?
+	z DWORD ?
+	inp BYTE 11 DUP(?)
+	takeX BYTE "Enter x : ",0
+	takeY BYTE "Enter y : ",0
+	takeZ BYTE "Enter z : ",0
+	res BYTE 11 DUP(?),0
+	tit BYTE "Problem 2 Sheet 2",0
+
+.CODE
+
+MainProc PROC
+
+	input takeX,inp,11
+	atod inp
+	mov x,eax
+
+	input takeY,inp,11
+	atod inp
+	mov y,eax
+
+	input takeZ,inp,11
+	atod inp
+	mov z,eax
+
+	mov eax,x
+	add eax,y
+	imul eax,2
+	add eax,z
+
+	dtoa res,eax
+	output tit,res
+
+
+	mov eax, 0
+	ret
+
+MainProc ENDP
+
+END
