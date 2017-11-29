@@ -1,0 +1,45 @@
+.586
+.MODEL FLAT
+.STACK 4096
+INCLUDE io.h
+
+.DATA
+
+	len DWORD ?
+	wid DWORD ?
+
+	inp BYTE 11 DUP(?)
+	takeWidth BYTE "Enter width : ",0
+	takeLength BYTE "Enter length : ",0
+
+	res BYTE 11 DUP(?),0
+	tit BYTE "Problem 3 Sheet 2",0
+
+.CODE
+
+MainProc PROC
+
+	input takeWidth,inp,11
+	atod inp
+	mov wid,eax
+
+	input takeLength,inp,11
+	atod inp
+	mov len,eax
+
+	
+
+	mov eax,wid
+	add eax,len
+	imul eax,2
+	
+	dtoa res,eax
+	output tit,res
+
+
+	mov eax, 0
+	ret
+
+MainProc ENDP
+
+END
